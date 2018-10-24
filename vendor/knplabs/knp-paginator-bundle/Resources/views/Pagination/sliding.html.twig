@@ -1,0 +1,17 @@
+{# default Sliding pagination control implementation #}
+
+
+
+
+{% if pageCount > 1 %}
+    <ul class="pager nomargin">
+        {% if previous is defined %}
+            <li class="previous"><a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">Previous scene <i class="fa fa-arrow-left"></i> </a></li>
+        {% endif %}
+
+        {% if next is defined %}
+            <li class="next"><a href="{{ path(route, query|merge({(pageParameterName): next})) }}">Next scene <i class="fa fa-arrow-right "></i></a></li>
+
+        {% endif %}
+    </ul><!-- .pager end -->
+{% endif %}

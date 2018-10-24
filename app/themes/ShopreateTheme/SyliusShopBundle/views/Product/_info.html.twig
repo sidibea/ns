@@ -1,0 +1,26 @@
+{% set product = variant.product %}
+
+<td class="cart-image">
+    {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail'} %}
+</td>
+<td class="cart-product-name-info">
+    <h4 class='cart-product-description'><a href="">{{ item.productName }} </a></h4>
+    <div class="row">
+        {% if product.hasOptions() %}
+            <div class="ui horizontal divided list sylius-product-options">
+                {% for optionValue in variant.optionValues %}
+                    <div class="item" data-sylius-option-name="{{ optionValue.name }}">
+                        {{ optionValue.value }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% elseif item.variantName is not null %}
+            <div class="ui horizontal divided list">
+                <div class="item sylius-product-variant-name">
+                    {{ item.variantName }}
+                </div>
+            </div>
+        {% endif %}
+    </div><!-- /.row -->
+
+</td>

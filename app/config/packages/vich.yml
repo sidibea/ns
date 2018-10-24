@@ -1,0 +1,13 @@
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        book_cover:
+            uri_prefix:         '%app.path.book_cover%'
+            upload_destination: '%kernel.root_dir%/../web%app.path.book_cover%'
+        profile_picture:
+            uri_prefix:         '%app.path.profile_picture%'
+            upload_destination: '%kernel.root_dir%/../web%app.path.profile_picture%'
+        photo_forum:
+            uri_prefix:         '%app.path.book_cover%'
+            upload_destination: '%kernel.root_dir%/../web%app.path.book_cover%'

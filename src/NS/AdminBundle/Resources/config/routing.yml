@@ -1,0 +1,69 @@
+ns_admin_homepage:
+    path:     /
+    defaults: { _controller: NSAdminBundle:Dashboard:index }
+ns_admin_forun:
+    path:     /forum
+    defaults: { _controller: NSAdminBundle:Forum:list }
+ns_admin_forun_add_new:
+    path:     /forum/add-new
+    defaults: { _controller: NSAdminBundle:Forum:add }
+ns_admin_forun_edit:
+    path:     /forum/edit/{id}
+    defaults: { _controller: NSAdminBundle:Forum:edit }
+ns_admin_scenes:
+    path:     /scenes
+    defaults: { _controller: NSAdminBundle:Scenes:list }
+ns_admin_activate_scenes:
+    path:     /activate-scenes/{id}
+    defaults: { _controller: NSAdminBundle:Scenes:validate }
+
+ns_admin_view_proposed_scenes:
+    path:     /scenes/{id}/vew-proposed-scenes
+    defaults: { _controller: NSAdminBundle:Scenes:view }
+ns_admin_view_proposed_scenes:
+    path:     /scenes/{id}/validate-proposed
+    defaults: { _controller: NSAdminBundle:Scenes:validate }
+
+ns_admin_articles:
+    path:     /articles
+    defaults: { _controller: NSAdminBundle:Articles:list }
+ns_admin_articles_new:
+    path:     /articles/add-new
+    defaults: { _controller: NSAdminBundle:Articles:add }
+ns_admin_articles_edit:
+    path:     /articles/edit/{id}
+    defaults: { _controller: NSAdminBundle:Articles:edit }
+ns_admin_testimonials:
+    path:     /testimonials
+    defaults: { _controller: NSAdminBundle:Testimonial:list }
+ns_admin_testimonials_new:
+    path:     /testimonials/add-new
+    defaults: { _controller: NSAdminBundle:Testimonial:add }
+ns_admin_testimonials_edit:
+    path:     /testimonials/edit/{id}
+    defaults: { _controller: NSAdminBundle:Testimonial:edit }
+
+ns_admin_partners:
+    path:     /partners
+    defaults: { _controller: NSAdminBundle:Partners:list }
+ns_admin_partners_new:
+    path:     /partners/add-new
+    defaults: { _controller: NSAdminBundle:Partners:add }
+ns_admin_partners_edit:
+    path:     /partners/edit/{id}
+    defaults: { _controller: NSAdminBundle:Partners:edit }
+
+ns_admin_storyline:
+    path:     /storyline
+    defaults: { _controller: NSAdminBundle:Story:list }
+
+ns_admin_users:
+    path:     /users
+    defaults: { _controller: NSAdminBundle:User:list }
+ns_terms_of_use:
+    path:     /terms-of-use
+    defaults: { _controller: NSAdminBundle:CMS:terms }
+
+
+
+

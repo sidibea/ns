@@ -1,0 +1,17 @@
+
+{% for association in product.associations %}
+<section class="section featured-product wow fadeInUp">
+    <div class="header-section"><h3 class="section-title"> {{ 'sylius.ui.latest_products'|trans }}</h3></div>
+    <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+        {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/Product/Show/_association.html.twig'})) }}
+
+    </div>
+</section>
+{% else %}
+<section class="section featured-product wow fadeInUp">
+    <div class="header-section"><h3 class="section-title"> {{ 'sylius.ui.latest_products'|trans }}</h3></div>
+    <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+        {{ render(url('sylius_shop_partial_product_index_latest', {'count': 10, 'template': '@SyliusShop/Product/_horizontalList.html.twig'})) }}
+    </div>
+</section>
+{% endfor %}

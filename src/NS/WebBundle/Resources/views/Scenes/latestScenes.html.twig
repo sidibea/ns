@@ -1,0 +1,10 @@
+{% if scenes | length > 0 %}
+    {% for scene in scenes %}
+        <div style="margin-left: 10%;"  class="no-margin panel panel-default">
+            <div  class=" panel-heading"><b>{{ scene.title }}</b></div>
+            <div class="panel-body">
+                {{ scene.content  | raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

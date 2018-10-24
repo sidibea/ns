@@ -1,0 +1,83 @@
+{% extends "NSAdminBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Articles</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Articles</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('ns_admin_articles_new') }}" class="btn btn-secondary">Create new</a><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ pagination.getTotalItemCount }} Articles </strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th {% if pagination.isSorted('a.title') %} class="sorted"{% endif %} scope="col">{{ knp_pagination_sortable(pagination, 'title', 'a.title') }}</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for article in pagination %}
+                                <tr>
+                                    <th scope="row"><img class="image_fade" style="width: 50px; height: 50px " src="{{ vich_uploader_asset(article, 'photoFile') }}"/></th>
+                                    <td>{{ article.title }}</td>
+                                    <td>{{ article.description | slice(3, 200)| raw }}</td>
+                                    <td>
+                                        {% if article.Enabled == true %}
+                                            <span class="badge badge-success">Active</span>
+                                        {% else %}
+                                            <span class="badge badge-danger">Desactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('ns_admin_articles_edit', { 'id': article.id }) }}"  class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ path('ns_admin_forun_edit', { 'id': article.id }) }}"  class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="navigation center">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

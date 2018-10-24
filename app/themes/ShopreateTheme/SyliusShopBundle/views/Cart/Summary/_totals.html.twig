@@ -1,0 +1,48 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{{ sonata_block_render_event('sylius.shop.cart.summary.totals', {'cart': cart}) }}
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <div class="cart-sub-total">
+                {{ 'sylius.ui.tax'|trans }}:<span class="inner-left-md">{{ money.convertAndFormat(cart.taxTotal) }}</span>
+            </div>
+            <div class="cart-sub-total">
+                {{ 'sylius.ui.shipping'|trans }}:<span class="inner-left-md">{{ money.convertAndFormat(cart.shippingTotal) }}</span>
+            </div>
+            {% if cart.orderPromotionTotal %}
+            <div class="cart-sub-total">
+                {{ 'sylius.ui.discount'|trans }}:<span class="inner-left-md">{{ money.convertAndFormat(cart.orderPromotionTotal) }}</span>
+            </div>
+            {% endif %}
+            <div class="cart-grand-total">
+                {{ 'sylius.ui.order_total'|trans }}:<span class="inner-left-md">{{ money.convertAndFormat(cart.total) }}</span>
+            </div>
+            {% if cart.currencyCode is not same as(sylius.currencyCode) %}
+            <div class="cart-grand-total">
+                {{ 'sylius.ui.base_currency_order_total'|trans }}:<span class="inner-left-md">{{ money.format(cart.total, cart.currencyCode) }}</span>
+            </div>
+            {% endif %}
+
+        </th>
+    </tr>
+    </thead><!-- /thead -->
+    <tbody>
+    <tr>
+        <td>
+            <div class="cart-checkout-btn pull-right">
+                {% include '@SyliusShop/Cart/Summary/_checkout.html.twig' %}
+            </div>
+        </td>
+    </tr>
+    </tbody><!-- /tbody -->
+</table><!-- /table -->
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+    <li class="active"><a data-toggle="tab" href="#description">{{ 'sylius.ui.details'|trans }}</a></li>
+    {% if product.attributes|length > 0 %}
+        <li><a class="item" data-toggle="tab" href="#attributes">{{ 'sylius.ui.attributes'|trans }}</a></li>
+    {% endif %}
+    <li><a data-toggle="tab" href="#review">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a></li>
+    <li><a data-toggle="tab" href="#tags">Media</a></li>
+</ul><!-- /.nav-tabs #product-tabs -->
+

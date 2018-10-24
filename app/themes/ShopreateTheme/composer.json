@@ -1,0 +1,14 @@
+{
+  "name": "app/Shopreate-theme",
+  "authors": [
+    {
+      "name": "Sekou Assane Sidibe",
+      "email": "sidibesekouassane@gmail.com"
+    }
+  ],
+  "extra": {
+    "sylius-theme": {
+      "title": "Shopreate Theme"
+    }
+  }
+}

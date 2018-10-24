@@ -1,0 +1,38 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+    <div class="col_half">
+        <label for="register-form-name">Firstname:</label>
+        {{ form_widget(form.firstname, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class="col_half col_last">
+        <label for="register-form-name">Firstname:</label>
+        {{ form_widget(form.lastname, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class="col_half">
+        <label for="register-form-name">Username:</label>
+        {{ form_widget(form.username, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class="col_half col_last">
+        <label for="register-form-name">Email:</label>
+        {{ form_widget(form.email, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class="">
+        <label for="register-form-name">Current password:</label>
+        {{ form_widget(form.current_password, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class=" ">
+        <label for="register-form-name">Biography:</label>
+        {{ form_widget(form.biographie, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+    </div>
+    <div class="row">
+        <input class="button button-3d  button-rounded button-green" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}

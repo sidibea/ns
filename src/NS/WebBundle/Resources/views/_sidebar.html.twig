@@ -1,0 +1,44 @@
+<div class="sidebar nobottommargin col_last clearfix">
+
+    <div class="forum">
+
+        <div class="sidebar-widgets-wrap">
+
+            <div class="widget widget_links clearfix">
+
+                <div class="fancy-title title-bottom-border">
+                    <h3>FORUMS</h3>
+                </div>
+
+                {{ render(controller('NSForumBundle:Forum:vertical')) }}
+
+
+            </div>
+
+            <div class="widget clearfix">
+
+                <h4>Facebook Feeds</h4>
+                <div id="dribbble-widge">
+                    <div class="fb-page" data-href="https://www.facebook.com/nextscenes" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/nextscenes" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/nextscenes">Nextscenes</a></blockquote></div>
+                </div>
+
+            </div>
+
+            <div class="widget widget-twitter-feed clearfix">
+
+                <h4>Update !!</h4>
+                <img src="{{ absolute_url(asset('assets/front/images/open.png')) }}" />
+
+            </div>
+
+            <div class="widget widget-twitter-feed clearfix">
+
+                <img src="{{ absolute_url(asset('assets/front/images/google-play.png')) }}" />
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

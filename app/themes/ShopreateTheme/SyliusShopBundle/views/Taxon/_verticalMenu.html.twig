@@ -1,0 +1,27 @@
+{{ sonata_block_render_event('sylius.shop.product.index.before_vertical_menu', {'taxon': taxon}) }}
+
+
+<!-- ================================== TOP NAVIGATION ================================== -->
+<div class="side-menu animate-dropdown outer-bottom-xs">
+    <div class="menu-inner">
+        <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> {{ taxon.name }}</div>
+        <nav class="yamm megamenu-horizontal">
+            <ul class="nav">
+                {% if taxon.parent is not empty and not taxon.parent.isRoot() %}
+                <li class="dropdown menu-item"> <a href="{{ path('sylius_shop_product_index', {'slug': taxon.parent.slug, '_locale': taxon.parent.translation.locale}) }}" class="item">
+                        <i class="up arrow icon"></i> {{ 'sylius.ui.go_level_up'|trans }}
+                    </a> </li>
+                {% endif %}
+
+                {% for child in taxon.children %}
+                <li class="dropdown menu-item"> <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('sylius_shop_product_index', {'slug': child.slug, '_locale': child.translation.locale}) }}" class="item">{{ child.name }}</a></li>
+                {% endfor %}
+
+            </ul>
+            <!-- /.nav -->
+        </nav>
+        <!-- /.megamenu-horizontal -->
+    </div>
+</div>
+<!-- /.side-menu -->
+{{ sonata_block_render_event('sylius.shop.product.index.after_vertical_menu', {'taxon': taxon}) }}

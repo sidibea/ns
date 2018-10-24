@@ -1,0 +1,19 @@
+{% block stylesheets %}
+    {% stylesheets filter='cssrewrite, scssphp'
+    'bundles/app/css/bootstrap.min.css'
+    'bundles/app/css/main.css'
+    'bundles/app/css/blue.css'
+    'bundles/app/css/simple-line-icons.css'
+    'bundles/app/css/owl.carousel.css'
+    'bundles/app/css/owl.transitions.css'
+    'bundles/app/css/animate.min.css'
+    'bundles/app/css/rateit.css'
+    'bundles/app/css/bootstrap-select.min.css'
+    'bundles/app/css/font-awesome.css'
+    'bundles/app/css/style.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+
+
+{% endblock %}

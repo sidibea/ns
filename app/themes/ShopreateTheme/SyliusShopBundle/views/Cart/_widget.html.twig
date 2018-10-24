@@ -1,0 +1,57 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 animate-dropdown top-cart-row">
+    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+    {{ sonata_block_render_event('sylius.shop.partial.cart.summary.before_widget_content', {'cart': cart}) }}
+
+    <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+            <div class="items-cart-inner">
+                <div class="basket"><img src="assets/images/cart.png" alt="">
+                    <span>My cart</span>
+                </div>
+                <div class="basket-item-count"><span class="count">{{ cart.items|length }}</span></div>
+
+            </div>
+            {{ sonata_block_render_event('sylius.shop.partial.cart.summary.after_widget_content', {'cart': cart}) }}
+        </a>
+        {{ sonata_block_render_event('sylius.shop.partial.cart.summary.before_popup_content', {'cart': cart}) }}
+        {% if cart.empty %}
+        {{ 'sylius.ui.your_cart_is_empty'|trans }}.
+        {% else %}
+        <ul class="dropdown-menu">
+            {% for item in cart.items %}
+                <li>
+                    <div class="cart-item product-summary">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="image"> <a href="detail.html"><img src="assets/images/cart.jpg" alt=""></a> </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <h3 class="name"><a href="index.php?page-detail">{{ item.product }} x {{ item.quantity }}</a></h3>
+                                <div class="price">{{ money.convertAndFormat(item.unitPrice) }}</div>
+                            </div>
+                            <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
+                        </div>
+                    </div>
+                    <!-- /.cart-item -->
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="clearfix cart-total">
+                        <div class="pull-right"> <span class="text">{{ 'sylius.ui.subtotal'|trans }} :</span><span class='price'>{{ money.convertAndFormat(cart.itemsTotal) }}</span> </div>
+                        <div class="clearfix"></div>
+                        <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-upper btn-primary btn-block m-t-20">{{ 'sylius.ui.checkout'|trans }}</a> </div>
+                    <!-- /.cart-total-->
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+        {{ sonata_block_render_event('sylius.shop.partial.cart.summary.after_popup_content', {'cart': cart}) }}
+        <!-- /.dropdown-menu-->
+    </div>
+
+    <!-- /.dropdown-cart -->
+
+</div>

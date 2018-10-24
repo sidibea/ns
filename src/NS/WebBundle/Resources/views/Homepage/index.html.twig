@@ -1,0 +1,218 @@
+{% extends "NSWebBundle::layout.html.twig" %}
+
+{% block title %} Nextscenes.com{% endblock %}
+
+{% block slider %}
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-12 ">
+                <section id="slider" class=" boxed-slider">
+
+                    <div class="container clearfix">
+
+                        <div class="nivoSlider">
+                            <a href="{{ path('ns_web_how_it_works') }}">
+                                <img src="assets/front/images/slider/boxed/ns_banner1.png" alt="Slider 1"  />
+
+                            </a>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                <img src="assets/front/images/slider/boxed/ns_banner2.png" alt="Slider 2"/>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrap" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+        <div class="container clearfix">
+            <div class="tabs clearfix" id="tab-3">
+
+                <ul class="tab-nav tab-nav2 clearfix">
+                    {% for forum in forums %}
+                        <li><a href="#tabs-{{ forum.id }}">{{ forum.name }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                <div class="tab-container">
+                    {% for forum in forums %}
+
+                        <div class="tab-content clearfix" id="tabs-{{ forum.id }}">
+                            <div id="oc-posts" class="owl-carousel posts-carousel carousel-widget" data-margin="20" data-nav="true" data-pagi="false" data-items-xxs="1" data-items-xs="2" data-items-sm="3" data-items-md="3">
+                                {% for story in forum.storylines %}
+                                    <div class="oc-item">
+                                        <div class="ipost clearfix">
+                                            <div class="entry-image">
+                                                <a href="{{ vich_uploader_asset(story, 'imageFile') }}" data-lightbox="image"><img class="image_fade" src="{{ vich_uploader_asset(story, 'imageFile') }}" alt="{{ story.title }}"></a>
+                                            </div>
+                                            <div class="entry-title">
+                                                <h3><a href="{{ path('ns_web_story_view', { 'id': story.id }) }}">{{ story.title }}</a></h3>
+                                            </div>
+                                            <ul class="entry-meta clearfix">
+                                                <li><i class="icon-calendar3"></i> {{  story.createdAt | date('d M Y') }}</li>
+                                                <li><a href="#"><i class="icon-user"></i> {{ story.publishedBy.firstname }} {{ story.publishedBy.lastname }}</a></li>
+                                                <li><a href="#"><i class="icon-folder"></i> {{ story.scenes |length }} scenes</a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+            <div class="container clearfix">
+
+                <div class="col-md-4">
+                    <img src="{{ absolute_url(asset('assets/front/images/author.png')) }}" />
+
+                </div>
+                <div class="col-md-8">
+                    <h4>Facebook Feeds</h4>
+                    <div id="dribbble-widge" class="col_half">
+                        <div class="fb-page" data-height="300" data-href="https://www.facebook.com/nextscenes" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/nextscenes" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/nextscenes">Nextscenes</a></blockquote></div>
+                    </div>
+                    <div class="col_half col_last">
+                        <a class="twitter-timeline" data-height="300" href="https://twitter.com/nextscenes?ref_src=twsrc%5Etfw">Tweets by nextscenes</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+
+        <div class="section notopmargin notopborder" style="font-family: Courier;  word-spacing: 4px">
+            <div class="container clearfix">
+                <div class="heading-block center nomargin">
+                    <h3>Latest from the Blog</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="container clear-bottommargin clearfix" style="font-family: Courier; text-align: left; word-spacing: 4px">
+            <div class="row">
+
+                <div id="oc-posts" class="owl-carousel posts-carousel carousel-widget" data-margin="20" data-nav="true" data-pagi="false" data-items-xxs="1" data-items-xs="2" data-items-sm="3" data-items-md="3">
+                    {% for article in articles %}
+                        <div class="oc-item">
+                            <div class="ipost clearfix">
+                                <div class="entry-image">
+                                    <a href="{{ path('ns_web_blog_single', { 'id': article.id }) }}"><img class="image_fade" style="height: 300px; width: 500px" src="{{ vich_uploader_asset(article, 'photoFile') }}" alt="{{ article.title }}"></a>
+                                </div>
+                                <div class="entry-title" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                                    <h3><a href="{{ path('ns_web_blog_single', { 'id': article.id }) }}">{{ article.title }}</a></h3>
+                                </div>
+                                <ul class="entry-meta clearfix">
+                                    <li><i class="icon-calendar3"></i> {{ article.createdAt | date('d M Y') }}</li>
+                                </ul>
+                                <div class="entry-content">
+                                    <p>{{ article.description }}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="section dark parallax nobottommargin" style="padding: 80px 0;background-image: url({{ absolute_url(asset('assets/front/images/parallax/1.jpg')) }});" data-stellar-background-ratio="0.3">
+
+            {{ render(controller('NSWebBundle:Main:Counter')) }}
+
+
+        </div>
+
+        <div class="section parallax dark nobottommargin" style="background-image: url('images/services/home-testi-bg.jpg'); padding: 100px 0;" data-stellar-background-ratio="0.4">
+            <div class="heading-block center">
+                <h3>What they think about us?</h3>
+            </div>
+            {{ render(controller('NSWebBundle:Main:Testimonial')) }}
+
+        </div>
+
+        <div class="container clearfix">
+
+            <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-margin="60" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xxs="2" data-items-xs="3" data-items-sm="4" data-items-md="5" data-items-lg="6">
+                {{ render(controller('NSWebBundle:Main:Partner')) }}
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        jQuery(document).ready(function($) {
+
+            $('.nivoSlider').nivoSlider({
+                effect: 'random',
+                slices: 15,
+                boxCols: 12,
+                boxRows: 6,
+                animSpeed: 500,
+                pauseTime: 8000,
+                directionNav: true,
+                controlNav: true,
+                pauseOnHover: true,
+                prevText: '<i class="icon-angle-left"></i>',
+                nextText: '<i class="icon-angle-right"></i>',
+                afterLoad: function(){
+                    $('#slider').find('.nivo-caption').addClass('slider-caption-bg');
+                }
+            });
+
+        });
+
+    </script>
+
+{% endblock %}

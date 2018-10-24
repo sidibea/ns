@@ -1,0 +1,25 @@
+
+ns_web:
+    resource: "@NSWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    path:   /login
+    defaults:  { _controller: NSUserBundle:Security:login }
+
+login_check:
+    path:   /login_check
+
+ns_admin:
+    resource: "@NSAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

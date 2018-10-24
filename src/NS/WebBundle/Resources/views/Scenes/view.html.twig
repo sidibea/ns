@@ -1,0 +1,137 @@
+{% extends "NSWebBundle::layout.html.twig" %}
+
+{% block title %} {{ story.title }} {% endblock %}
+
+{% block page_title %}
+    <section id="page-title" class="page-title-nobg">
+
+        <div class="container clearfix" >
+            <h1 style="font-family: Courier; text-align: justify; word-spacing: 4px">{{  story.title }}</h1>
+            <span style="font-family: Courier; text-align: justify; word-spacing: 4px">You are reading the last 5 (five)  validated scenes of this storyline</span>
+
+        </div>
+
+    </section>
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-wrap">
+        <div class="container clearfix notopmargin " style="top: -2em; font-size: 1.2em; text-transform: uppercase; font-family: Courier" >
+
+            <span><a href="{{ path('ns_web_homepage') }}">Home /</a></span>
+            <span><a href="{{ path('ns_web_forums', { 'id' : story.forum.id }) }}">{{ story.forum.name }}  /  </a></span>
+
+            <span><a href="{{ path('ns_web_story_view', { 'id': story.id }) }}">{{ story.title }} /</a></span>
+            <span class="active">view scenes</span>
+        </div>
+        <div class="container">
+            <div class="postcontent nobootommargin clearfix" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                <div class="clear"></div>
+                {% if scene != null %}
+                    {% for scene in pagination %}
+                        <div class=" panel panel-default">
+                            <div class="panel-heading" style="font-family: Courier; text-align: justify; word-spacing: 4px"><b>{{ scene.title }}</b></div>
+                            <div class="panel-body" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                                {{ scene.content  | raw }}
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    {% endfor %}
+                    <div class="line"></div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title-bottom-border uppercase">Proposed Scenes</h3>
+                            {{ render(controller(
+                                'NS\\WebBundle\\Controller\\SceneController::proposedScene',
+                                { 'story': app.request.get('id') }
+                            )) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 " >
+                            <div class="clear"></div>
+                            <div class="line"></div>
+                            <div class="row">
+                                {% if app.user.id != story.publishedBy.id %}
+                                    {% if story.type == "Solo writing" %}
+                                        <a href="" class="button button-3d button-rounded button-green fright"><i class="icon-plus"></i>Add new scene</a>
+                                    {% elseif story.type == "Collaborative writing" %}
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#proposenewscene" aria-expanded="false" aria-controls="proposenewscene"  class="collapsed button button-3d button-rounded button-green fright"><i class="icon-plus"></i>Propose next scene</a>
+                                        <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}" class="collapsed button button-3d button-rounded button-red fleft"><i class="icon-book-open"></i>View details</a>
+                                    {% elseif story.type == "Group writing" %}
+                                        {% set contributors = [] %}
+                                        {% for contributor in story.contributors %}
+                                            {% set contributors = contributors |merge([contributor.id]) %}
+                                        {% endfor %}
+
+                                        {% if app.user.id in contributors %}
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#proposenewscene" aria-expanded="false" aria-controls="proposenewscene"  class="collapsed button button-3d button-rounded button-green fright"><i class="icon-plus"></i>Propose next scene</a>
+                                            <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}" class="collapsed button button-3d button-rounded button-red fleft"><i class="icon-book-open"></i>View details</a>
+
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                {% endif %}
+                            </div>
+                            <div class="panel-group" id="accordion">
+                                <div id="proposenewscene" class="panel-collapse collapse">
+                                    {{ form_start(form) }}
+
+                                    {# Les erreurs générales du formulaire. #}
+                                    {{ form_errors(form) }}
+                                    <div class="row">
+
+                                        <div class="form-group">
+                                            <label for="nom_carte">Content</label>
+                                            {{ form_widget(form.content, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                                        </div>
+
+                                        <div class=" line"></div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="button button-3d button-large button-rounded button-green">Submit</button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {{ form_rest(form) }}
+
+                                    {# Fermeture de la balise <form> du formulaire HTML #}
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                {% else %}
+                    <h3 class="red center" style="color: red">No scene in this storyline !</h3>
+                {% endif %}
+
+
+            </div>
+            {% include "NSWebBundle::_sidebar.html.twig" %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+    <script type="text/javascript">
+        $('.feed').infiniteScroll({
+            path: '.pagination__next',
+            append: '.article',
+            status: '.scroller-status',
+            hideNav: '.pagination',
+        });
+    </script>
+{% endblock %}

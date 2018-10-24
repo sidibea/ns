@@ -1,0 +1,3 @@
+ns_forum_homepage:
+    path:     /
+    defaults: { _controller: NSForumBundle:Default:index }

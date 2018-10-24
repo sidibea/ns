@@ -1,0 +1,55 @@
+ns_web_homepage:
+    path:     /
+    defaults: { _controller: NSWebBundle:Main:homepage }
+
+ns_web_forums:
+    path:     /forums/{id}
+    defaults: { _controller: NSWebBundle:Main:forum }
+
+ns_web_forums_display:
+    path:     /forums/
+    defaults: { _controller: NSWebBundle:Forum:list }
+ns_web_forums_contact:
+    path:     /contact
+    defaults: { _controller: NSWebBundle:Main:contact }
+ns_web_story_new:
+    path:     /story/new
+    defaults: { _controller: NSWebBundle:Story:add }
+ns_web_story_edit:
+    path:     /story/edit/{id}
+    defaults: { _controller: NSWebBundle:Story:edit }
+ns_web_story_new_scene:
+    path:     /story/{id}/new/first-scene
+    defaults: { _controller: NSWebBundle:Story:firstScene }
+ns_web_story_view:
+    path:     /story/{id}/view
+    defaults: { _controller: NSWebBundle:Story:view }
+ns_web_scenes_add:
+    path:     /story/{id}/new-scene
+    defaults: { _controller: NSWebBundle:Scene:new }
+ns_web_read_story:
+    path:     /story/{id}/view-story
+    defaults: { _controller: NSWebBundle:Story:read }
+
+ns_web_scenes_view:
+    path:     /scenes/{id}/view
+    defaults: { _controller: NSWebBundle:Scene:view }
+ns_web_scenes_read:
+    path:     /scenes/{id}/read
+    defaults: { _controller: NSWebBundle:Scene:read }
+ns_web_proposed_scenes_add:
+    path:     /scenes/{id}/proposed-scene
+    defaults: { _controller: NSWebBundle:ProposedScene:add }
+ns_web_proposed_scenes_view:
+    path:     /scenes/{id}/view-proposed-scene
+    defaults: { _controller: NSWebBundle:ProposedScene:view }
+
+ns_web_how_it_works:
+    path:     /how-it-works
+    defaults: { _controller: NSWebBundle:Main:how }
+ns_web_blog_single:
+    path:     /blog/{id}
+    defaults: { _controller: NSWebBundle:Main:showArticle }
+ns_web_terms_of_use:
+    path:     /terms-of-use
+    defaults: { _controller: NSWebBundle:Main:terms }

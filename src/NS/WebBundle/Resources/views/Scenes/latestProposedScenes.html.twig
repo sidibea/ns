@@ -1,0 +1,10 @@
+{% if proposed | length > 0 %}
+    {% for propose in proposed %}
+        <div style="margin-left: 10%;"  class="no-margin panel panel-default">
+            <div  class=" panel-heading" style="font-family: Courier; text-align: justify; word-spacing: 4px"><b>{{ propose.title }}</b></div>
+            <div class="panel-body" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                {{ propose.content  | raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

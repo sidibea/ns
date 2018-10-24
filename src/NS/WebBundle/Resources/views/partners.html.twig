@@ -1,0 +1,4 @@
+{% for partner in partners %}
+    <div class="oc-item"><a href="{{ partner.link }}"><img src="{{ vich_uploader_asset(partner, 'imageFile') }}" alt="{{ partner.name }}"></a></div>
+{% endfor %}
+

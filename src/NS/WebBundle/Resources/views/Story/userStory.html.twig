@@ -1,0 +1,37 @@
+
+{% if pagination.items is not empty %}
+    {% for story in pagination %}
+        <div class="col-xs-12 bottommargin-sm">
+            <div class="ipost clearfix">
+                <div class="row clearfix">
+                    <div class="col-sm-4">
+                        <div class="entry-image">
+                            <a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" src="{{ vich_uploader_asset(story, 'imageFile') }}" alt="{{ story.title }}"></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="entry-title">
+                            <h3><a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}">{{ story.title }}</a></h3>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                            <li><i class="icon-calendar3"></i> {{ story.createdAt |date(' d M Y') }}</li>
+                            <li><a href="#"><i class="icon-comments"></i> {{ story.scenes | length }} scenes</a></li>
+                        </ul>
+                        <div class="entry-content" style="font-family: Courier !important;">
+                            {{ story.description  | raw |slice(15, 100)  }}...
+
+                            <a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}" class="more-link"><i class="icon-door"></i>View scenes</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+{% else %}
+    <h2 class="title center">You have no storyline !</h2>
+{% endif %}
+
+

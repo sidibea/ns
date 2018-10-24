@@ -1,0 +1,4 @@
+services:
+#    ns_scenes.example:
+#        class: NS\ScenesBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

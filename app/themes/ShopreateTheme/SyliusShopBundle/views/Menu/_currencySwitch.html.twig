@@ -1,0 +1,10 @@
+{% if currencies|length > 1 %}
+    <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">{{ active }} </span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            {% for code in currencies %}
+                <li><a href="{{ path('sylius_shop_switch_currency', {'code': code}) }}">{{ code }}</a></li>
+
+            {% endfor %}
+        </ul>
+    </li>
+{% endif %}

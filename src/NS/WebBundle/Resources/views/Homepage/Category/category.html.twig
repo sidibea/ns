@@ -1,0 +1,78 @@
+
+<!-- Header
+============================================= -->
+<header id="header" class="no-sticky">
+
+    <div id="header-wrap">
+
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+            ============================================= -->
+            <div id="logo" class="nobottomborder visible-md visible-lg">
+                <a href="{{ path('ns_web_homepage') }}" class="standard-logo" data-dark-logo="{{ absolute_url(asset('assets/front/images/logo.png')) }}"><img src="{{ absolute_url(asset('assets/front/images/logo.png')) }}" alt="nextscenes Logo"></a>
+                <a href="{{ path('ns_web_homepage') }}" class="retina-logo" data-dark-logo="{{ absolute_url(asset('assets/front/images/logo.png')) }}"><img src="{{ absolute_url(asset('assets/front/images/logo.png')) }}" alt="nextscenes Logo"></a>
+            </div><!-- #logo end -->
+
+            <!-- Primary Navigation
+            ============================================= -->
+            <nav id="primary-menu">
+
+                <ul>
+                    <li><a href="{{ path('ns_web_homepage') }}"><div>Home</div></a></li>
+                    <li><a href="{{ path('ns_web_forums_display') }}"><div>Forums</div></a>
+                        <ul>
+
+                            {% for forum in forums %}
+                                <li><a href="{{ path('ns_web_forums', { 'id': forum.id }) }}"><div>{{ forum.name }}</div></a> </li>
+                            {% endfor %}
+
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('ns_web_how_it_works') }}"><div>How nextscenes works</div></a></li>
+                    <li><a href="{{ path('ns_web_story_new') }}"><div>Create new story</div></a></li>
+                    <li><a href=""><div>NS - Shop</div></a></li>
+                    <li><a href="{{ path('ns_web_forums_contact') }}"><div>Contact</div></a></li>
+                </ul>
+
+            </nav><!-- #primary-menu end -->
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="clearfix">
+                    <a href="{{ path('fos_user_profile_show') }}">
+                        <img src="{{ absolute_url(asset('assets/front/images/icons/avatar.jpg')) }}" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+                        <div class="heading-block noborder">
+                            <h5>{{ app.user.firstname }} {{ app.user.lastname }}</h5>
+                            <span><a href="{{ path('fos_user_profile_edit') }}">Edit profile</a> </span>
+                            <span><a href="{{ path('fos_user_security_logout') }}">Logout </a> </span>
+                        </div>
+                    </a>
+                </div>
+
+            {% endif %}
+
+            <div class="clearfix visible-md visible-lg">
+                <a href="https://www.facebook.com/nextscenes/?ref=br_rs" class="social-icon si-small si-borderless si-facebook">
+                    <i class="icon-facebook"></i>
+                    <i class="icon-facebook"></i>
+                </a>
+
+                <a href="https://twitter.com/nextscenes" class="social-icon si-small si-borderless si-twitter">
+                    <i class="icon-twitter"></i>
+                    <i class="icon-twitter"></i>
+                </a>
+
+                <a href="#" class="social-icon si-small si-borderless si-gplus">
+                    <i class="icon-gplus"></i>
+                    <i class="icon-gplus"></i>
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->

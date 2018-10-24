@@ -1,0 +1,79 @@
+{% extends "NSAdminBundle::layout.html.twig" %}
+{% block title %} {{ parent() }} Partners{% endblock %}
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Create new partner</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{ path('ns_admin_homepage') }}">Dashboar</a> </li>
+                    <li><a href="{{ path('ns_admin_articles') }}">Terms of use</a> </li>
+                    <li class="active">Create new</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_start(form) }}
+
+                {# Les erreurs générales du formulaire. #}
+                {{ form_errors(form) }}
+                <div class="card">
+
+                    <div class="card-body">
+                        {% if not form.vars.valid %}
+
+                            {# Loop through every form item #}
+                            {% for child in form.children %}
+                                {# Display the errors of the form item #}
+                                {%for error in child.vars.errors%}
+                                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                        <span class="badge badge-pill badge-danger">Error</span>
+                                        {{error.message}}
+                                    </div>
+                                {%endfor%}
+                            {%endfor%}
+
+                        {%endif%}
+
+
+                        <div class="form-group">
+                            <label class=" form-control-label">Terms of use</label>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': ' ' }}) }}
+
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Save
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+
+{% endblock %}

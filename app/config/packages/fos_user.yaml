@@ -1,0 +1,13 @@
+fos_user:
+    firewall_name: main
+    user_class: NS\UserBundle\Entity\User
+    from_email:
+        address: account@nextscenes.com
+        sender_name: Nextscences.com
+    registration:
+        form:
+            type: NS\UserBundle\Form\RegistrationType
+
+
+
+
