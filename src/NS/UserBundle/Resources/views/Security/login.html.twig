@@ -30,6 +30,7 @@
                             <input type="password" id="login-form-password" name="_password" value="" class="form-control not-dark" />
                         </div>
 
+
                         <div class="col_full nobottommargin">
                             <button type="submit" class="button button-3d button-black nomargin" name="login-form-submit" value="login">Login</button>
                             <a href="{{ path('fos_user_resetting_request') }}" class="fright">Forgot Password?</a>
@@ -40,6 +41,7 @@
                     </div>
 
                     <div class="line line-sm"></div>
+
 
 
                 </div>
@@ -53,4 +55,8 @@
 
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}

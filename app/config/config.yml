@@ -118,6 +118,8 @@ fos_comment:
         model:
             comment: NS\CoreBundle\Entity\Comment
             thread: NS\CoreBundle\Entity\Thread
-
-
-
+ewz_recaptcha:
+    public_key:  6LcPAncUAAAAAK1WC1rEuSgK18vwjk_cPubtO-OY
+    private_key: 6LcPAncUAAAAABwK6MoRj2nL2-mGagr_9qH5O25m
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    locale_key:  %kernel.default_locale%

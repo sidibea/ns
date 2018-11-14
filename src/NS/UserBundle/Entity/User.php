@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 
 /**
  * User
@@ -46,6 +47,13 @@ class User extends BaseUser
      */
     private $biographie;
 
+    /**
+     * One Storyline has Many scenes.
+     * @ORM\OneToMany(targetEntity="NS\ScenesBundle\Entity\Storyline", mappedBy="contributors", cascade={"remove"})
+     */
+    private $storylines;
+
+
 
     /**
      * @var string
@@ -59,6 +67,11 @@ class User extends BaseUser
      * @var File
      */
     private $profileFile;
+
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
 
     /**
      * @var date
@@ -210,6 +223,42 @@ class User extends BaseUser
     {
         $this->biographie = $biographie;
     }
+
+    /**
+     * @return string
+     */
+    public function getRecaptcha()
+    {
+        return $this->recaptcha;
+    }
+
+    /**
+     * @param string $recaptcha
+     */
+    public function setRecaptcha($recaptcha)
+    {
+        $this->recaptcha = $recaptcha;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStorylines()
+    {
+        return $this->storylines;
+    }
+
+    /**
+     * @param mixed $storylines
+     */
+    public function setStorylines($storylines)
+    {
+        $this->storylines = $storylines;
+    }
+
+
+
+
 
 
 

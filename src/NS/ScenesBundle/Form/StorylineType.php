@@ -3,6 +3,8 @@
 namespace NS\ScenesBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use NS\ScenesBundle\Entity\Scene;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -52,7 +54,13 @@ class StorylineType extends AbstractType
                     return $er->createQueryBuilder('u');
                 },
                 'choice_label' => 'name'
+            ))
+            ->add('recaptcha', EWZRecaptchaType::class, array(
+
+                'mapped'      => false,
+
             ));
+
     }/**
      * {@inheritdoc}
      */

@@ -3,6 +3,7 @@
 namespace NS\ScenesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 
 /**
  * Scene
@@ -29,6 +30,11 @@ class Scene
     private $storyline;
 
     /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
@@ -49,9 +55,11 @@ class Scene
      */
     private $count;
 
+
+
     /**
      * One Storyline has Many scenes.
-     * @ORM\OneToMany(targetEntity="ProposedScene", mappedBy="scene")
+     * @ORM\OneToMany(targetEntity="ProposedScene", mappedBy="scene", cascade={"remove"})
      */
     private $proposedScenes;
 

@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use NS\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
+
 
 /**
  * Storyline
@@ -61,6 +63,11 @@ class Storyline
     private $description;
 
     /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
@@ -83,9 +90,11 @@ class Storyline
 
     /**
      * One Storyline has Many scenes.
-     * @ORM\OneToMany(targetEntity="Scene", mappedBy="storyline")
+     * @ORM\OneToMany(targetEntity="Scene", mappedBy="storyline", cascade={"remove"})
      */
     private $scenes;
+
+
 
 
 

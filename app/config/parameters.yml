@@ -1,10 +1,10 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: next-bus.net
-    database_port: null
-    database_name: nextb9og_ns
-    database_user: nextb9og_ns
-    database_password: sorofing
+    database_host: 127.0.0.1
+    database_port: 8889
+    database_name: nextscenes
+    database_user: root
+    database_password: root
     mailer_transport: mail
     mailer_host: ssl0.ovh.net
     mailer_user: account@nextscenes.com

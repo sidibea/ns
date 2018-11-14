@@ -1,0 +1,31 @@
+{% for contributor in pagination %}
+
+
+        <div class="col-md-3 col-sm-6 bottommargin">
+
+            <div class="team">
+                <div class="team-image">
+                    <img src="{{ vich_uploader_asset(contributor, 'profileFile') }}" alt="{{ contributor.username }}">
+                </div>
+                <div class="team-desc">
+                    <div class="team-title"><h4>{{ contributor.firstname }} {{ contributor.lastname }}</h4><span>{{ contributor.username }}</span></div>
+                    <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+                        <i class="icon-facebook"></i>
+                        <i class="icon-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+                        <i class="icon-twitter"></i>
+                        <i class="icon-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+                        <i class="icon-gplus"></i>
+                        <i class="icon-gplus"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+
+{% endfor %}

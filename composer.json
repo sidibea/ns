@@ -24,11 +24,14 @@
         "craue/formflow-bundle": "^3.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "excelwebzone/recaptcha-bundle": "^1.5",
         "friendsofsymfony/ckeditor-bundle": "^1.1",
         "friendsofsymfony/comment-bundle": "^2.2",
         "friendsofsymfony/user-bundle": "^2.1",
+        "google/recaptcha": "^1.2",
         "hwi/oauth-bundle": "^0.6.3",
         "incenteev/composer-parameter-handler": "^2.0",
+        "kleegroup/google-recaptcha-bundle": "^1.0",
         "knplabs/knp-paginator-bundle": "^2.8",
         "leafo/scssphp": "^0.7.7",
         "liip/theme-bundle": "^1.5",
@@ -47,7 +50,8 @@
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
         "twig/twig": "^1.0||^2.0",
-        "vich/uploader-bundle": "^1.8"
+        "vich/uploader-bundle": "^1.8",
+        "vihuvac/recaptcha-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

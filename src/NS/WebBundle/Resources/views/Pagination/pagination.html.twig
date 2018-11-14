@@ -1,0 +1,24 @@
+<!-- Pagination
+                ============================================= -->
+
+<ul class="pager nomargin">
+    {% if previous is defined %}
+        <li class="previous">
+            <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <span>&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
+        </li>
+    {% endif %}
+
+    {% if next is defined %}
+        <li class="next">
+            <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <span>{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
+        </li>
+    {% endif %}
+</ul><!-- .pager end -->

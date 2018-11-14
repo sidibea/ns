@@ -30,7 +30,18 @@ class StorylineRepository extends \Doctrine\ORM\EntityRepository
 
         return $result;
 
+    }
 
+    public function getContributors($user)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('')
+            ->select('s.contributors', 'c')
+            ->where('s.publishedBy = :user')
+            ->orderBy('s.createdAt')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
 
     }
 

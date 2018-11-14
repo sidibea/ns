@@ -1,0 +1,18 @@
+{% for article in pagination %}
+    <div class="spost clearfix">
+        <div class="entry-image">
+            <a href="{{ path('ns_web_blog_single', { 'id': article.id }) }}" class="nobg"><img class="img-circle" src="{{ vich_uploader_asset(article, 'photoFile') }}" alt=""></a>
+        </div>
+        <div class="entry-c">
+            <div class="entry-title">
+                <h4><a href="#">{{ article.title }}</a></h4>
+            </div>
+            <ul class="entry-meta">
+                <li>{{ article.createdAt |date('d M Y') }}</li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    {% endfor %}

@@ -3,7 +3,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="author" content="Nextscenes" />
 
     {% stylesheets filter="scssphp, cssrewrite" output="css/compiled/app.css"
     'assets/front/css/bootstrap.css'
@@ -23,7 +23,6 @@
 
     {% block stylesheet %} {% endblock %}
 
-
     <!-- Bootstrap Switch CSS -->
     <link rel="stylesheet" href="{{ absolute_url(asset('assets/front/css/components/bs-switches.css')) }}" type="text/css" />
 
@@ -39,9 +38,11 @@
     ============================================= -->
     <title>{% block title %} {% endblock %}</title>
 
+
+
 </head>
 
-<body class="stretched side-header side-header-right open-header push-wrapper close-header-on-scroll">
+<body onselectstart="return false" oncopy="return false" oncut="return false" onpaste="return false" class="stretched side-header side-header-right open-header push-wrapper close-header-on-scroll">
 
 <!-- Document Wrapper
 ============================================= -->
@@ -62,9 +63,9 @@
                         <li >
                             <a style="color: #0b2e13;" href="#" data-toggle="dropdown" class="dropdown-toggle">CHOOSE YOUR COUNTRY <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Mali - French</a></li>
-                                <li><a href="#">Nigeria - English</a></li>
-                                <li><a href="#">Angola - Portuguese</a></li>
+                                <li><a href="http://ml.nextscenes.com">Mali - French</a></li>
+                                <li><a href="http://ng.nextscenes.com">Nigeria - English</a></li>
+                                <li><a href="http://ag.nextscenes.com">Angola - Portuguese</a></li>
                             </ul>
                         </li>
 
@@ -271,6 +272,7 @@
 <script type="text/javascript" src="{{ absolute_url(asset('assets/front/js/components/bs-switches.js')) }}"></script>
 <script type="text/javascript" src="{{ absolute_url(asset('assets/front/js/jquery.nivo.js')) }}"></script>
 <script type="text/javascript" src="{{ absolute_url(asset('assets/front/js/functions.js')) }}"></script>
+
 {% block scripts %} {% endblock %}
 </body>
 </html>

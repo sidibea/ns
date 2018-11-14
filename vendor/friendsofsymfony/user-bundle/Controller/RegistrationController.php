@@ -59,6 +59,7 @@ class RegistrationController extends Controller
         $user = $this->userManager->createUser();
         $user->setEnabled(true);
 
+        
         $event = new GetResponseUserEvent($user, $request);
         $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 

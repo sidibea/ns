@@ -1,37 +1,70 @@
 
 {% if pagination.items is not empty %}
-    {% for story in pagination %}
-        <div class="col-xs-12 bottommargin-sm">
-            <div class="ipost clearfix">
-                <div class="row clearfix">
-                    <div class="col-sm-4">
-                        <div class="entry-image">
-                            <a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" src="{{ vich_uploader_asset(story, 'imageFile') }}" alt="{{ story.title }}"></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="entry-title">
-                            <h3><a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}">{{ story.title }}</a></h3>
-                        </div>
-                        <ul class="entry-meta clearfix">
-                            <li><i class="icon-calendar3"></i> {{ story.createdAt |date(' d M Y') }}</li>
-                            <li><a href="#"><i class="icon-comments"></i> {{ story.scenes | length }} scenes</a></li>
-                        </ul>
-                        <div class="entry-content" style="font-family: Courier !important;">
-                            {{ story.description  | raw |slice(15, 100)  }}...
-
-                            <a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}" class="more-link"><i class="icon-door"></i>View scenes</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+    {% for forum in pagination %}
+        <div class="fancy-title title-double-border">
+            <h1>All <span>{{ forum.name }}</span> Storylines</h1>
         </div>
+       {% for story in forum.storylines %}
+           {% if app.user.id == story.publishedBy.id %}
+               <div class="row">
+                   <div class="col-xs-12 bottommargin-sm">
+                       <div class="ipost clearfix">
+                           <div class="row clearfix">
+                               <div class="col-sm-4">
+                                   <div class="entry-image">
+                                       <a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" src="{{ vich_uploader_asset(story, 'imageFile') }}" alt="{{ story.title }}"></a>
+                                   </div>
+                               </div>
+                               <div class="col-sm-8">
+                                   <div class="entry-title">
+                                       <h3><a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}">{{ story.title }}</a></h3>
+                                   </div>
+                                   <ul class="entry-meta clearfix">
+                                       <li><i class="icon-calendar3"></i> {{ story.createdAt |date(' d M Y') }}</li>
+                                       <li><a href="#"><i class="icon-comments"></i> {{ story.scenes | length }} scenes</a></li>
+                                       <li><a href="#"><i class="icon-user"></i> {{ story.publishedBy.username }} </a></li>
+
+                                       {% if story.type == "Group writting" %}
+                                           <li><i class="icon-users"></i> {{ story.contributors |length }} contributors</li>
+
+                                       {% endif %}
+                                   </ul>
+
+                                   <div class="entry-content" style="font-family: Courier !important;">
+                                       {{ story.description  | striptags |slice(0, 100)  }}...
+
+                                       <a href="{{ path('ns_web_story_edit', { 'id': story.id }) }}" class="more-link"><i class="icon-door"></i>Edit storyline</a>
+                                       <a onclick="return confirm('Are you sure you want to delete this story ?');" href="{{ path('ns_web_story_delete', { 'id': story.id }) }}" class="more-link"><i class="icon-door"></i>Delete storyline</a>
+                                       {% if story.type == 'Group writting' %}
+                                           <a href="{{ path('ns_web_add_contributors', { 'id': story.id }) }}" class="more-link"><i class="icon-door"></i>Add contributors </a>
+
+                                       {% endif %}
+                                       <br><br>
+                                       <div id="proposed-{{ story.id }}">
+                                           {{ render(controller(
+                                           'NS\\WebBundle\\Controller\\StoryController::userProposed',
+                                           {},
+                                           { 'id': story.id }
+                                           )) }}
+
+
+                                       </div>
+
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           {% endif %}
+
+        {% endfor %}
 
 
     {% endfor %}
 {% else %}
     <h2 class="title center">You have no storyline !</h2>
 {% endif %}
+
 
 

@@ -29,7 +29,7 @@ class ScenesController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            5/*limit per page*/
+            10/*limit per page*/
         );
 
         return $this->render('NSAdminBundle:Scenes:list.html.twig', [
@@ -63,7 +63,7 @@ class ScenesController extends Controller
         $scene = new Scene();
 
         $scene->setContent($proposed->getContent());
-        $scene->setTitle($proposed->getScene()->getTitle()."[proposed]/scene-".$proposed->getCount());
+        $scene->setTitle($proposed->getTitle());
         $scene->setCreatedAt(new \datetime);
         $scene->setUpdatedAt(new \datetime);
         $scene->setStoryline($proposed->getScene()->getStoryline());
@@ -73,14 +73,27 @@ class ScenesController extends Controller
         $em->persist($scene);
         $em->flush();
 
+        $del = $em->getRepository('NSScenesBundle:ProposedScene')->findBy([
+            'scene' => $proposed->getScene()
+        ]);
+
+        if($del != null)
+        {
+            foreach ($del as $key=>$val)
+            {
+                $em->remove($val);
+                $em->flush();
+            }
+        }
+
         $request->getSession()->getFlashBag()->add('notice', 'The scenes has been successfully created.');
 
         return $this->redirect($this->generateUrl('ns_admin_scenes'));
 
-
-
-
-
     }
+
+
+
+
 
 }

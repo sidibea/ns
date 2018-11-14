@@ -36,6 +36,13 @@ class ProposedScene
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="text")
+     */
+    private $title;
+
+    /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="NS\UserBundle\Entity\User")
      */
@@ -201,6 +208,24 @@ class ProposedScene
     {
         $this->count = $count;
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+
 
 
 }

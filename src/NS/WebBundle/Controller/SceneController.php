@@ -30,6 +30,7 @@ class SceneController extends Controller
 
         if($form->handleRequest($request)->isValid())
         {
+            $scene->setTitle("Scene ".$count." (".$scene->getTitle().")");
             $scene->setCreatedAt(new \datetime);
             $scene->setUpdatedAt(new \datetime);
             $scene->setStoryline($story);
@@ -90,6 +91,8 @@ class SceneController extends Controller
 
         if($form->handleRequest($request)->isValid())
         {
+           // dump($form->get('title')->getData()); exit;
+            $proposed->setTitle('Scene '.($lastScene[0]->getCount()+1) ." (".$form->get('title')->getData().") /".$count);
             $proposed->setIsEnabled(false);
             $proposed->setPublishedBy($this->getUser());
             $proposed->setScene($lastScene[0]);

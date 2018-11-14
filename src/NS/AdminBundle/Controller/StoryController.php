@@ -25,7 +25,7 @@ class StoryController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1),
-            500
+            20
         );
 
         return $this->render('NSAdminBundle:Story:list.html.twig', [

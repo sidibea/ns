@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             // And finally
 
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new NS\WebBundle\NSWebBundle(),
@@ -31,11 +30,11 @@ class AppKernel extends Kernel
             new NS\ForumBundle\NSForumBundle(),
             new NS\ScenesBundle\NSScenesBundle(),
             new NS\AdminBundle\NSAdminBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
 
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];

@@ -112,6 +112,48 @@ class MainController extends Controller
         ]);
     }
 
+    public function blogAction(Request $request)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT p FROM NSForumBundle:Articles p WHERE p.enabled = :true";
+        $query = $em->createQuery($dql);
+        $query->setParameters([
+            'true' => true
+        ]);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        return $this->render('NSWebBundle:Blog:index.html.twig', [
+            'pagination' => $pagination
+        ]);
+    }
+
+    public function Latest(Request $request)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT p FROM NSForumBundle:Articles p WHERE p.enabled = :true ORDER BY p.createdAt";
+        $query = $em->createQuery($dql);
+        $query->setParameters([
+            'true' => true
+        ]);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        return $this->render('NSWebBundle:Blog:latest.html.twig', [
+            'pagination' => $pagination
+        ]);
+    }
+
 
 
 

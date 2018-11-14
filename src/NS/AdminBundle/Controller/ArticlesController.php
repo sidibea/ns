@@ -27,7 +27,7 @@ class ArticlesController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            5/*limit per page*/
+            20/*limit per page*/
         );
 
         return $this->render('NSAdminBundle:Articles:list.html.twig', [

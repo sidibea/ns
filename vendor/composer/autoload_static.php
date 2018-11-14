@@ -18,17 +18,18 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
         'd11dcc0191a380951885e568af488540' => __DIR__ . '/..' . '/sonata-project/block-bundle/src/Resources/stubs/symfony2.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
         '146da4a92f41abdf5d14d092c8008c2b' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'V' => 
         array (
+            'Vihuvac\\Bundle\\RecaptchaBundle\\' => 31,
             'Vich\\UploaderBundle\\' => 20,
         ),
         'T' => 
@@ -69,6 +70,10 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'Sensio\\Bundle\\DistributionBundle\\' => 33,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
@@ -97,6 +102,7 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
             'Knp\\Menu\\' => 9,
             'Knp\\Bundle\\PaginatorBundle\\' => 27,
             'Knp\\Bundle\\MenuBundle\\' => 22,
+            'KleeGroup\\GoogleReCaptchaBundle\\' => 32,
         ),
         'J' => 
         array (
@@ -135,6 +141,7 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
         'E' => 
         array (
             'Exporter\\' => 9,
+            'EWZ\\Bundle\\RecaptchaBundle\\' => 27,
         ),
         'D' => 
         array (
@@ -157,6 +164,10 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
     );
 
     public static $prefixDirsPsr4 = array (
+        'Vihuvac\\Bundle\\RecaptchaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vihuvac/recaptcha-bundle/src',
+        ),
         'Vich\\UploaderBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/vich/uploader-bundle',
@@ -289,6 +300,10 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
         array (
             0 => __DIR__ . '/..' . '/sensio/distribution-bundle',
         ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -344,6 +359,10 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
         'Knp\\Bundle\\MenuBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-menu-bundle/src',
+        ),
+        'KleeGroup\\GoogleReCaptchaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kleegroup/google-recaptcha-bundle',
         ),
         'JMS\\SerializerBundle\\' => 
         array (
@@ -427,6 +446,10 @@ class ComposerStaticInitbb39808569e033facab47bf895925075
         'Exporter\\' => 
         array (
             0 => __DIR__ . '/..' . '/sonata-project/exporter/src',
+        ),
+        'EWZ\\Bundle\\RecaptchaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/excelwebzone/recaptcha-bundle/src',
         ),
         'Doctrine\\ORM\\' => 
         array (

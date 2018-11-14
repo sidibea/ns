@@ -18,6 +18,9 @@ ns_web_story_new:
 ns_web_story_edit:
     path:     /story/edit/{id}
     defaults: { _controller: NSWebBundle:Story:edit }
+ns_web_story_delete:
+    path:     /story/delete/{id}
+    defaults: { _controller: NSWebBundle:Story:delete }
 ns_web_story_new_scene:
     path:     /story/{id}/new/first-scene
     defaults: { _controller: NSWebBundle:Story:firstScene }
@@ -53,3 +56,12 @@ ns_web_blog_single:
 ns_web_terms_of_use:
     path:     /terms-of-use
     defaults: { _controller: NSWebBundle:Main:terms }
+ns_web_add_contributors:
+    path:     /add-contributors/{id}
+    defaults: { _controller: NSWebBundle:Story:addContributors }
+ns_web_validate_scenes:
+    path:     /scenes/validate/{id}
+    defaults: { _controller: NSWebBundle:Story:validate }
+ns_web_blog:
+    path:     /blog
+    defaults: { _controller: NSWebBundle:Main:blog }

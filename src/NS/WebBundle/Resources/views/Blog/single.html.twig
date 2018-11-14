@@ -13,7 +13,7 @@
 
         <div class="container clearfix">
 
-            <div class="single-post nobottommargin">
+            <div class="postcontent nobottommargin col_last clearfix">
 
                 <!-- Single Post
                 ============================================= -->
@@ -40,7 +40,7 @@
 
                     <!-- Entry Content
                     ============================================= -->
-                    <div class="entry-content notopmargin" style="font-family: 'Helvetica Neue'; font-size: 24px; text-align: justify;">
+                    <div class="entry-content notopmargin" style="font-family: 'Helvetica Neue'; font-size: 15px; text-align: justify;">
 
                         {{ article.content | raw }}
 
@@ -93,6 +93,30 @@
                 </div><!-- #comments end -->
 
 
+
+            </div>
+            <div class="sidebar nobottommargin clearfix">
+                <div class="sidebar-widgets-wrap">
+                    <div class="fancy-title title-bottom-border">
+                        <h3>LATEST NEWS</h3>
+                    </div>
+                    {{ render(controller(
+                    'NS\\WebBundle\\Controller\\MainController::Latest'
+                    )) }}
+                    <div class="widget clearfix">
+
+                        <h4>Facebook Feeds</h4>
+                        <div id="dribbble-widge">
+                            <div class="fb-page" data-href="https://www.facebook.com/nextscenes" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/nextscenes" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/nextscenes">Nextscenes</a></blockquote></div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
 
             </div>
 

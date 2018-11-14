@@ -34,6 +34,10 @@
                         <label for="nom_carte">Scene</label>
                         {{ form_widget(form.content, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': 'Write your first scene here' }}) }}
                     </div>
+                    <div class="col_full ">
+                        {{ form_widget(form.recaptcha, {'attr': {'class': '', 'placeholder': '' }}) }}
+
+                    </div>
 
                     <div class=" line"></div>
 

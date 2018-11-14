@@ -11,9 +11,11 @@ namespace NS\WebBundle\Controller;
 
 use NS\ScenesBundle\Entity\Scene;
 use NS\ScenesBundle\Entity\Storyline;
+use NS\ScenesBundle\Form\ContributorsType;
 use NS\ScenesBundle\Form\SceneType;
 use NS\ScenesBundle\Form\StorylineType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 class StoryController extends Controller
@@ -100,6 +102,7 @@ class StoryController extends Controller
 
         if($form->handleRequest($request)->isValid())
         {
+            $scene->setTitle("Scene ".$count." (".$scene->getTitle().")");
             $scene->setCreatedAt(new \datetime);
             $scene->setUpdatedAt(new \datetime);
             $scene->setStoryline($story);
@@ -111,7 +114,7 @@ class StoryController extends Controller
 
 
 
-            $request->getSession()->getFlashBag()->add('notice', 'The scenes has been successfully created.');
+            $request->getSession()->getFlashBag()->add('success', 'The scenes has been successfully created.');
 
             return $this->redirect($this->generateUrl('ns_web_story_view', ['id' => $id ]));
 
@@ -162,12 +165,19 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+
+
         //dump($id); exit;
 
-        $dql   = "SELECT s FROM NSScenesBundle:Storyline s WHERE s.publishedBy = :user and s.isEnabled = :true Order BY s.createdAt ";
+        $dql   = "SELECT f FROM NSForumBundle:Forum f JOIN  f.storylines st
+                  
+                  JOIN st.publishedBy u
+                  WHERE  u.id = :user
+                   and f.isEnabled = :true 
+                   Order BY f.createdAt ";
         $query = $em->createQuery($dql);
         $query->setParameters([
-            'user' => $this->getUser(),
+            'user' => $this->getUser()->getId(),
             'true' => true
         ]);
 
@@ -219,5 +229,160 @@ class StoryController extends Controller
 
         $mailer->send($message);
     }
+
+    public function userProposed( Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id = $request->get('id');
+
+        $dql   = "SELECT p, s, st, u FROM NSScenesBundle:ProposedScene p  JOIN p.scene s JOIN s.storyline st JOIN st.publishedBy u WHERE u.id = :user and st.id = :storyline and p.isEnabled = :false Order BY p.createdAt ";
+        $query = $em->createQuery($dql);
+        $query->setParameters([
+            'user' => $this->getUser()->getId(),
+            'storyline' => $id,
+            'false' => false
+        ]);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        //dump($pagination); exit;
+
+        return $this->render('NSWebBundle:ProposedScene:userProposed.html.twig', [
+            'pagination' => $pagination,
+            'id' => $id
+        ]);
+    }
+
+    public function addContributorsAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $story = $em->getRepository('NSScenesBundle:Storyline')->find($id);
+        $form = $this->createForm(ContributorsType::class, $story);
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $story->setUpdatedAt(new \datetime);
+            $em->flush();
+
+            if($story->getContributors() !== null)
+            {
+                // dump($story->getContributors()); exit;
+
+                foreach ($story->getContributors() as $key => $contributor)
+                {
+                    $this->sendEmail($contributor->getEmail(), $contributor->getFirstname(), $contributor->getLastname(),  $this->getUser()->getFirstname()." ".$this->getUser()->getLastname(), $story->getId());
+
+                }
+
+            }
+
+            $request->getSession()->getFlashBag()->add('notice', 'The contributors has been successfully added');
+
+            return $this->redirect($this->generateUrl('ns_web_story_view', ['id' => $id ]));
+
+        }
+
+        return $this->render('NSWebBundle:Story:addContributors.html.twig', [
+            'form' => $form->createView(),
+            'story' => $story
+        ]);
+    }
+
+    public function contributors(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT  u FROM NSUserBundle:User u JOIN u.storylines st  WHERE st.publishedBy = :user ";
+        $query = $em->createQuery($dql);
+        $query->setParameters([
+            'user' => $this->getUser(),
+        ]);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        //dump($pagination); exit;
+
+        return $this->render('NSWebBundle:Story:contributors.html.twig', [
+            'pagination' => $pagination
+        ]);
+
+
+    }
+
+    public function deleteAction($id, Request $request)
+    {
+        $em    = $this->getDoctrine()->getManager();
+        $story = $em->getRepository('NSScenesBundle:Storyline')->find($id);
+
+        try{
+            $em->remove($story);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'The storyline  has been successfully deleted');
+
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function validateAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $proposed = $proposed = $em->getRepository('NSScenesBundle:ProposedScene')->find($id);
+
+        $scene = new Scene();
+
+        $scene->setContent($proposed->getContent());
+        $scene->setTitle($proposed->getTitle());
+        $scene->setCreatedAt(new \datetime);
+        $scene->setUpdatedAt(new \datetime);
+        $scene->setCount($proposed->getScene()->getCount()+1);
+        $scene->setStoryline($proposed->getScene()->getStoryline());
+        $scene->setIsEnabled(true);
+
+
+        $em->persist($scene);
+        $em->flush();
+
+        $del = $em->getRepository('NSScenesBundle:ProposedScene')->findBy([
+            'scene' => $proposed->getScene()
+        ]);
+
+        if($del != null)
+        {
+            foreach ($del as $key=>$val)
+            {
+                $em->remove($val);
+                $em->flush();
+            }
+        }
+        $em->remove($proposed);
+        $em->flush();
+
+
+
+        $request->getSession()->getFlashBag()->add('notice', 'The scenes has been successfully created.');
+
+        return $this->redirect($this->generateUrl('ns_admin_scenes'));
+
+
+
+
+
+    }
+
+
+
+
 
 }
